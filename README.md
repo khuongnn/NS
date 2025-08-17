@@ -1,4 +1,4 @@
-# Neural–Symbolic Reasoning Framework
+# Formal Knowledge Augmented Language Models for Explainable and Robust Reasoning
 
 This repository contains a minimal codebase that demonstrates the
 principles of the neural–symbolic integration framework proposed in
