@@ -22,22 +22,6 @@ The system is composed of several simple modules:
 | `data.py` | Provides helper functions for building toy datasets and splitting them into training, validation and test sets.  In real experiments you would replace this with loaders for GSM8K, CFQ, SCAN, etc. |
 | `training.py` | Implements a simple training loop and hyperparameter search for the symbolic loss weight \(\lambda\).  It demonstrates how to evaluate the pipeline on train/validation/test splits and report metrics such as accuracy and loss. |
 
-## Running the Pipeline
-
-You can execute the pipeline from the command line.  For example:
-
-```bash
-python -m neural_symbolic.main --query "Is a whale warm‑blooded?"
-```
-
-This will print the knowledge base, the retrieved facts and rules,
-the generated chain of thought, the constrained chain, and the final
-answer.  Since this is a toy example the reasoning is very simple,
-but the code structure mirrors the architecture described in the
-paper: a retrieval module feeds into a chain‑of‑thought generator,
-which is then filtered by symbolic constraints before producing the
-final answer.
-
 ## Extending the Code
 
 This codebase is intended as a starting point for further
@@ -71,17 +55,17 @@ In addition to the core pipeline, this repository includes a
 lightweight example of how to perform training, validation and testing
 on question–answer datasets.  The paper discusses experiments on
 benchmark corpora such as GSM8K, CFQ and SCAN, each of which comes
-with pre‑defined train–validation–test splits【623944606090707†screenshot】.  To emulate this setup in
+with pre‑defined train–validation–test splits.  To emulate this setup in
 our toy environment we provide:
 
 * **`data.py`**, which contains a small set of handcrafted
   question–answer pairs inspired by the knowledge snippets used in the
   paper.  The function `load_toy_dataset()` randomly divides these
   examples into training, validation and test subsets, much like the
-  standard splits used for GSM8K and CFQ【623944606090707†screenshot】.
+  standard splits used for GSM8K and CFQ.
 * **`training.py`**, which implements a simple hyperparameter search
   over the symbolic loss weight \(\lambda\) described in Equation 18
-  of the paper【623944606090707†screenshot】.  It evaluates candidate \(\lambda\) values on the
+  of the paper.  It evaluates candidate \(\lambda\) values on the
   validation set and selects the one that minimises the combined
   neural and symbolic loss.  The selected \(\lambda\) is then used to
   compute accuracy, average loss and symbolic penalties on the test
@@ -112,4 +96,4 @@ the test set.  To adapt the framework for real datasets, replace
 `load_toy_dataset()` with loaders for GSM8K or CFQ and integrate a
 trainable LLM into the `cot_generator` module.  The general structure
 of splitting data and tuning hyperparameters based on a validation
-set remains the same【623944606090707†screenshot】.
+set remains the same.
